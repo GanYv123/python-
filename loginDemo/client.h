@@ -18,6 +18,7 @@ public:
     QString readData(); // 读取服务器返回的数据
     QString get_Current_Data(); //返回最新读取到的数据
     QString get_leaf_info();
+    QString get_stu_infos();
 
 signals:
     void signalReceived(const QVariantMap &data); // 收到信号的信号
@@ -27,7 +28,7 @@ private slots:
 
 private:
     QTcpSocket *m_socket;
-    QString current_Data,leaf_info;
+    QString current_Data,leaf_info,students_infos;
 };
 
 #endif // CLIENT_H

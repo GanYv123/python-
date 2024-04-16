@@ -4,6 +4,7 @@ from coreFiles.server_for_qtClient import TCPServer
 import threading
 def main():
     # 创建并启动服务器
+    print('启动服务器ing...')
     server = TCPServer()
     server_thread = threading.Thread(target=server.start)
     server_thread.start()

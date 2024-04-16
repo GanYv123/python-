@@ -3,12 +3,17 @@
 #include "widget.h"
 #include "client.h"
 #include "clientthread.h"
+#include <Windows.h>
+#include <shellapi.h>
 
 login_UI::login_UI(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::login_UI)
 {
     ui->setupUi(this);
+    QThread *serverThread = new start_server_thread;
+    serverThread->start();
+    QThread::sleep(1);//等待 确保服务器正常启动
     //register_infos = new std::map<QString,QString>;
     clientThread = new ClientThread(this);
     connect(clientThread, &ClientThread::dataReceived, this, &login_UI::onDataReceived);
@@ -48,6 +53,13 @@ QString login_UI::read_operSender_from_server(QString s)
 ClientThread *login_UI::get_thread_client_point()
 {
     return clientThread;
+}
+
+void start_server_thread::start_server()
+{//启动服务器
+    const char* _PATH_SERVER_  = "python C:\\Users\\17255\\Desktop\\python\\codeDemo\\shiyan1\\main.py";
+    system(_PATH_SERVER_);
+
 }
 
 void login_UI::on_pb_sign_up_clicked()
@@ -105,7 +117,7 @@ void login_UI::on_pb_login_in_clicked()
     //密码正确,跳转页面
     //qDebug()<<"密码正确，登录成功！";
     ui->label_tips->setText("密码正确，登录成功！");
-    send_tips_to_server("密码正确，登录成功！");
+    send_tips_to_server("密码正确，登录成功！"+QString("用户UID ： %1").arg(ui->le_username->text()));
     delete lg;
     //登录成功之后的函数
     Widget* w = new Widget(clientThread);
@@ -151,3 +163,8 @@ void login_UI::on_pb_randPasswd_clicked()
     }
 }
 
+void start_server_thread::run()
+{
+    start_server();
+
+}

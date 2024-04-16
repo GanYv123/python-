@@ -4,13 +4,12 @@
 #include <QDialog>
 #include "login_judge.h" //用于登陆验证
 #include <map>
+#include "qthread.h"
 #include "clientthread.h"
 
 namespace Ui {
 class login_UI;
 }
-
-
 
 class login_UI : public QDialog
 {
@@ -40,6 +39,17 @@ private:
     QString t_passwd;
 
     ClientThread *clientThread;//client thread point
+
 };
+
+class start_server_thread :public QThread{
+public:
+    void run() override;
+    void start_server();
+private:
+    start_server_thread* serverThread;
+};
+
+
 
 #endif // LOGIN_UI_H
