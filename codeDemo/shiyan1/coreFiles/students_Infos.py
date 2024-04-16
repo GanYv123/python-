@@ -89,10 +89,10 @@ class students_info_count:
         for student in students:
             students_info_count.classification(student)
             infos = student.getName() + "\t" + str(student.getScore()) + "\t" + student.getGPA()
-            print(infos)
+            #print(infos)
             file_info += (infos + '\n')
 
         m_f.write_file(file_info)
 
-        students_info_count.print_classification()
+        #students_info_count.print_classification()
         

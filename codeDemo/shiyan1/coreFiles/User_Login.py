@@ -22,13 +22,13 @@ class User_Judge:
     
     @staticmethod
     def format_write_infos_to_file(infos):
-        userInfos = Manage_file("userInfos.ini")
+        userInfos = Manage_file("C:\\Users\\17255\\Desktop\\python\\codeDemo\\userInfos.ini")
         data = ""
         data = infos.replace(':','\t').replace(',','\n')
         userInfos.write_file(data)
 
     @staticmethod
     def send_theFormat_infos()->str:
-        userInfos = Manage_file("userInfos.ini")
+        userInfos = Manage_file("C:\\Users\\17255\\Desktop\\python\\codeDemo\\userInfos.ini")
         data = userInfos.read_allFile().replace('\n','\t')
         return "userInfos:"+data

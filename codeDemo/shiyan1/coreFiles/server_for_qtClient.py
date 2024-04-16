@@ -3,6 +3,7 @@ import socket
 import threading
 from coreFiles.User_Login import User_Judge
 from GUIFiles.MyGUI import Draw_Data
+from classFiles.ManageFiles import Manage_file
 from coreFiles.students_Infos import students_info_count as s_info
 
 class TCPServer:
@@ -53,6 +54,12 @@ class TCPServer:
             return
         if data == "Turn_off_leaf":
             self.close_leaf()
+            return
+        if data == "on_pb1_clicked":
+            #发送学生信息到qt
+            mf = Manage_file("info.txt")
+            stu_infos = "students_infos"+mf.read_allFile().replace('\t',',').replace('\n',',')
+            client_socket.send(stu_infos.encode('utf-8'))
             return
 
 

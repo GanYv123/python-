@@ -40,6 +40,11 @@ QString Client::readData()
         current_Data = decodedData;
         if(decodedData.contains("Stem"))
             leaf_info = decodedData;
+        if(decodedData.contains("students_infos")){
+            students_infos = decodedData;
+            students_infos.remove("students_infos");
+
+        }
     }
 
     return decodedData;
@@ -53,6 +58,11 @@ QString Client::get_Current_Data()
 QString Client::get_leaf_info()
 {
     return leaf_info;
+}
+
+QString Client::get_stu_infos()
+{
+    return students_infos;
 }
 
 
